@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>BB GLOW — แดชบอร์ดผู้บริหาร</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --gold:#C9A96E; --gold-dark:#9A7A2A; --gold-light:#E8D5A8;
+  --brown:#6A4A2A; --crimson:#8B1A2A;
+  --bg:#FFFDF8; --surface-1:#FFFFFF; --surface-2:#FFF7EA;
+  --border:rgba(201,169,110,0.28);
+  --text-primary:#3A2A18; --text-secondary:#6A5A48; --text-muted:#9A8878;
+  --shadow:0 2px 14px rgba(106,74,42,0.07);
+  /* สีข้อมูล (ผ่านการตรวจ contrast/ตาบอดสีแล้ว) */
+  --c-profit:#1baf7a; --c-comm:#2a78d6; --c-salary:#4a3aa7; --c-product:#eda100;
+  --c-bar:#C9A96E; --c-bar-top:#9A7A2A;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#16120E; --surface-1:#221B14; --surface-2:#2B2219;
+    --border:rgba(201,169,110,0.22);
+    --text-primary:#F6EEE2; --text-secondary:#CDBCA6; --text-muted:#9A8878;
+    --shadow:0 2px 16px rgba(0,0,0,0.4);
+    --c-profit:#199e70; --c-comm:#3987e5; --c-salary:#9085e9; --c-product:#c98500;
+    --c-bar:#A98A50; --c-bar-top:#E8C87A;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0; background:var(--bg); color:var(--text-primary);
+  font-family:'Sarabun',system-ui,-apple-system,sans-serif;
+  padding:0 0 40px; font-size:15px;
+  padding-top:env(safe-area-inset-top);
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px}
+
+/* ── หัว ── */
+header{padding:18px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.brand{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--brown);line-height:1.1}
+.brand span{color:var(--gold-dark)}
+.sub{font-size:0.72rem;color:var(--text-muted);margin-top:2px}
+.live{display:flex;align-items:center;gap:5px;font-size:0.7rem;color:var(--text-muted);white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--c-profit);box-shadow:0 0 0 0 rgba(27,175,122,0.5);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(27,175,122,0.45)}70%{box-shadow:0 0 0 7px rgba(27,175,122,0)}100%{box-shadow:0 0 0 0 rgba(27,175,122,0)}}
+.gear{background:none;border:1px solid var(--border);border-radius:9px;padding:5px 9px;font-size:0.95rem;cursor:pointer;color:var(--text-secondary)}
+
+/* ── ปุ่มช่วงเวลา ── */
+.ranges{display:flex;gap:6px;margin:4px 0 14px;overflow-x:auto;scrollbar-width:none}
+.ranges::-webkit-scrollbar{display:none}
+.rbtn{flex:1;min-width:76px;padding:9px 6px;border-radius:11px;border:1.5px solid var(--border);
+  background:var(--surface-1);color:var(--text-secondary);font-family:inherit;font-size:0.82rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.rbtn.on{background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-color:var(--gold-dark);color:#fff;box-shadow:0 3px 10px rgba(154,122,42,0.25)}
+
+/* ── การ์ด ── */
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.card-h{font-size:0.78rem;font-weight:700;color:var(--text-secondary);letter-spacing:0.3px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card-h em{font-style:normal;font-weight:400;color:var(--text-muted);font-size:0.72rem}
+
+/* ── ยอดขาย ── */
+.hero-label{font-size:0.75rem;color:var(--text-muted)}
+.hero-num{font-family:'Playfair Display',serif;font-size:2.7rem;font-weight:700;color:var(--brown);line-height:1.05;margin:2px 0 4px;letter-spacing:-1px}
+.hero-num small{font-size:1.1rem;font-weight:600;margin-left:3px;color:var(--gold-dark)}
+.hero-sub{font-size:0.8rem;color:var(--text-secondary)}
+.split{display:flex;gap:8px;margin-top:12px}
+.split>div{flex:1;background:var(--surface-2);border-radius:11px;padding:9px 11px}
+.split .k{font-size:0.68rem;color:var(--text-muted)}
+.split .v{font-size:1rem;font-weight:700;color:var(--text-primary);margin-top:1px}
+
+/* ── กำไร ── */
+.profit-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1.1;color:var(--c-profit)}
+.profit-pct{font-size:0.95rem;font-weight:700;color:var(--text-secondary);margin-left:6px}
+.stack{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:12px 0 10px;background:var(--surface-2);gap:2px}
+.seg{position:relative;min-width:2px;transition:width .4s ease}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px}
+.lg{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-secondary)}
+.sw{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.lg b{color:var(--text-primary);font-weight:700}
+
+/* ── ตาราง/แถว ── */
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.row:last-child{border-bottom:none}
+.row .nm{flex:1;font-size:0.86rem;color:var(--text-primary)}
+.row .nm small{display:block;color:var(--text-muted);font-size:0.7rem;margin-top:1px}
+.row .qty{font-size:0.75rem;color:var(--text-muted);white-space:nowrap}
+.row .amt{font-weight:700;font-size:0.92rem;color:var(--gold-dark);min-width:74px;text-align:right;white-space:nowrap}
+
+/* ── พนักงาน ── */
+.staff{display:grid;gap:10px}
+.sc{background:var(--surface-2);border-radius:13px;padding:13px}
+.sc-top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:0.85rem;flex-shrink:0}
+.sc-nm{font-weight:700;font-size:0.92rem}
+.sc-rl{font-size:0.7rem;color:var(--text-muted)}
+.sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;text-align:center}
+.sc-grid>div{background:var(--surface-1);border-radius:9px;padding:7px 3px}
+.sc-k{font-size:0.62rem;color:var(--text-muted)}
+.sc-v{font-size:0.88rem;font-weight:700;margin-top:1px}
+
+/* ── กราฟ ── */
+.chart{position:relative;height:150px;display:flex;align-items:flex-end;gap:5px;padding-top:22px}
+.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;cursor:default;position:relative}
+.bar{width:100%;background:var(--c-bar);border-radius:4px 4px 0 0;min-height:2px;transition:height .45s ease}
+.col.top .bar{background:var(--c-bar-top)}
+.col .dlabel{font-size:0.63rem;color:var(--text-muted);white-space:nowrap;margin-bottom:3px;line-height:1}
+.xlab{display:flex;gap:5px;margin-top:7px}
+.xlab div{flex:1;text-align:center;font-size:0.65rem;color:var(--text-muted)}
+.tip{position:absolute;pointer-events:none;background:var(--text-primary);color:var(--bg);font-size:0.72rem;
+  padding:5px 9px;border-radius:7px;white-space:nowrap;opacity:0;transition:opacity .15s;transform:translate(-50%,-100%);z-index:5}
+.tip.on{opacity:1}
+
+/* ── สถานะ ── */
+.state{text-align:center;padding:50px 20px;color:var(--text-muted);font-size:0.88rem}
+.spin{width:26px;height:26px;border:3px solid var(--border);border-top-color:var(--gold-dark);border-radius:50%;margin:0 auto 12px;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ── ตั้งค่า ── */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:flex-end;justify-content:center;z-index:50;backdrop-filter:blur(2px)}
+.ov.on{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom))}
+.sheet h3{margin:0 0 4px;font-size:1.05rem;color:var(--brown)}
+.sheet p.note{font-size:0.75rem;color:var(--text-muted);margin:0 0 16px;line-height:1.6}
+.fld{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.fld label{flex:1;font-size:0.84rem}
+.fld label small{display:block;color:var(--text-muted);font-size:0.68rem}
+.fld input{width:96px;padding:7px 9px;border:1.5px solid var(--border);border-radius:9px;background:var(--surface-1);
+  color:var(--text-primary);font-family:inherit;font-size:0.9rem;text-align:right}
+.sec-t{font-size:0.78rem;font-weight:700;color:var(--gold-dark);margin:18px 0 4px}
+.btn{width:100%;padding:13px;border:none;border-radius:13px;font-family:inherit;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:16px}
+.btn-p{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff}
+.btn-s{background:transparent;color:var(--text-secondary);border:1.5px solid var(--border);margin-top:8px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:var(--text-primary);color:var(--bg);
+  padding:11px 18px;border-radius:11px;font-size:0.85rem;opacity:0;transition:all .3s;z-index:99}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.warn{background:var(--surface-2);border:1px dashed var(--gold);border-radius:11px;padding:10px 12px;font-size:0.75rem;color:var(--text-secondary);margin-top:10px;line-height:1.6}
+@media(min-width:680px){
+  .staff{grid-template-columns:1fr 1fr}
+  .hero-num{font-size:3.1rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="brand">BB <span>GLOW</span></div>
+      <div class="sub">แดชบอร์ดผู้บริหาร · ครบวงจร หัวหิน</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="live"><span class="dot"></span><span id="live-txt">กำลังเชื่อม...</span></div>
+      <button class="gear" onclick="openSettings()" aria-label="ตั้งค่า">⚙️</button>
+    </div>
+  </header>
+
+  <div class="ranges" id="ranges"></div>
+  <div id="app"><div class="state"><div class="spin"></div>กำลังโหลดข้อมูล...</div></div>
+</div>
+
+<div class="ov" id="ov" onclick="if(event.target===this)closeSettings()">
+  <div class="sheet">
+    <h3>⚙️ ตั้งค่าตัวเลขต้นทุน</h3>
+    <p class="note">ตัวเลขพวกนี้ใช้คำนวณกำไร แก้เมื่อไหร่ก็ได้ · บันทึกแล้วจะใช้ร่วมกันทุกเครื่อง</p>
+    <div id="settings-body"></div>
+    <button class="btn btn-p" onclick="saveSettings()">บันทึก</button>
+    <button class="btn btn-s" onclick="closeSettings()">ปิด</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB8HM1grB7OsiBvdLo5xRH5SqLnQoLR25U",
+  authDomain: "bbglowhuahin-3bb7d.firebaseapp.com",
+  projectId: "bbglowhuahin-3bb7d",
+  storageBucket: "bbglowhuahin-3bb7d.firebasestorage.app",
+  messagingSenderId: "714462283652",
+  appId: "1:714462283652:web:088c6ddde11f46fc08ffd1"
+};
+// ── สวิตช์สำหรับตอนที่อาจารย์ทำ Firebase Authentication เสร็จแล้ว ──
+// ตั้ง enabled: true แล้วใส่บัญชีสำหรับ "ดูอย่างเดียว" ที่สร้างไว้ใน Firebase
+// แดชบอร์ดจะล็อกอินให้เองเงียบ ๆ (อาจารย์ไม่ต้องกรอกอะไร) แต่คนที่ไม่มีไฟล์นี้จะดึงข้อมูลไม่ได้
+const DASH_AUTH = { enabled:false, email:'dashboard@bbglow.local', password:'' };
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+async function ensureAuth(){
+  if(!DASH_AUTH.enabled) return;
+  try{ await signInWithEmailAndPassword(getAuth(app), DASH_AUTH.email, DASH_AUTH.password); }
+  catch(e){ console.warn('เข้าระบบอ่านข้อมูลไม่สำเร็จ', e.code||e); }
+}
+
+window.listenSales = cb => onSnapshot(collection(db,'sales'), s=>cb(s.docs.map(d=>d.data())));
+window.listenCosts = cb => onSnapshot(doc(db,'config','costs'), s=>cb(s.exists()?s.data():null));
+window.saveCosts   = data => setDoc(doc(db,'config','costs'), data);
+await ensureAuth();
+window.dbReady = true;
+window.dispatchEvent(new Event('dbReady'));
+</script>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  แดชบอร์ดผู้บริหาร BB GLOW  ·  v1.0 · 17 ก.ย. 69
+//  อ่านข้อมูลบิลจากระบบ POS อย่างเดียว ไม่แก้ไขอะไรในบิล
+// ═══════════════════════════════════════════════════════════
+const APP_VERSION = '1.0 · 17 ก.ย. 69';
+
+// ── ค่าตั้งต้น (แก้ได้ในหน้าตั้งค่า) ───────────────────────
+const DEFAULTS = {
+  salaryTotal: 22000,          // เงินเดือนรวมทั้งทีมต่อเดือน
+  rateBB: 13, rateWax: 7, rateSpa: 7,   // ต้นทุนผลิตภัณฑ์ (% ของยอดบริการ)
+  hcCost: {}                   // ทุนสินค้าโฮมแคร์ต่อชิ้น (บาท) — อาจารย์กรอกเอง
+};
+let COSTS = {...DEFAULTS};
+
+const STAFF = [
+  {id:'S2', name:'คุณเอ', role:'พนักงาน', bg:'linear-gradient(135deg,#3A6B47,#6B9E78)'},
+  {id:'S3', name:'หญิง',  role:'พนักงาน', bg:'linear-gradient(135deg,#A05040,#D4846A)'},
+];
+
+// สินค้าโฮมแคร์ (ราคาขาย — ตรงกับใน POS)
+const HOMECARE = [
+  {id:'foam_pinn',   name:'โฟมล้างหน้า',       price:370},
+  {id:'moist_pinn',  name:'มอยด์เจอร์',         price:350},
+  {id:'adv_pinn',    name:'แอดวานซ์เซรั่ม',     price:390},
+  {id:'mask_uv',     name:'แมสยูวี',             price:159},
+  {id:'spray_spf',   name:'สเปรย์กันแดด',       price:550},
+  {id:'mask_face',   name:'มาร์กหน้า',           price:9},
+  {id:'essence_wax', name:'เอสเซ้น ผิวแข็งแรง', price:490},
+  {id:'scrub_wax',   name:'สครับ',               price:300},
+  {id:'mask_wax',    name:'มาร์ค',               price:300},
+  {id:'gel_ua',      name:'เจล รักแร้',          price:289},
+  {id:'after_gel',   name:'อาฟเตอร์เจล',         price:250},
+];
+
+// ใช้เดากลุ่มต้นทุนของบิลเก่าที่ยังไม่ได้บันทึกรายการแยกบรรทัด
+const WAX_WORDS = ['wax','แว็กซ์','แว๊กซ์','คิ้ว','หนวด','เครา','ครึ่งขา','ทั้งขา','ทั้งแขน','รักแร้','บิกินี่','อก','หลัง','Facial Line','โหงวเฮ้ง'];
+const SPA_WORDS = ['spa','สปา'];
+
+let SALES = [];
+let range = 'today';
+let dataReady = false;
+
+// ── เครื่องมือ ─────────────────────────────────────────────
+const B = n => Math.round(n).toLocaleString('th-TH');
+const el = id => document.getElementById(id);
+const daysInMonth = d => new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+
+function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2600); }
+
+const RANGES = [
+  {key:'today', label:'วันนี้'},
+  {key:'d7',    label:'7 วัน'},
+  {key:'d15',   label:'15 วัน'},
+  {key:'month', label:'เดือนนี้'},
+];
+
+function rangeBounds(key){
+  const end = new Date(); end.setHours(23,59,59,999);
+  const start = new Date();
+  if(key==='today') start.setHours(0,0,0,0);
+  else if(key==='d7')  { start.setDate(start.getDate()-6); start.setHours(0,0,0,0); }
+  else if(key==='d15') { start.setDate(start.getDate()-14); start.setHours(0,0,0,0); }
+  else { start.setDate(1); start.setHours(0,0,0,0); }
+  return {start,end};
+}
+
+// จำนวนวันในช่วง (ใช้เฉลี่ยเงินเดือน)
+function daysInRange(key){
+  if(key==='today') return 1;
+  if(key==='d7') return 7;
+  if(key==='d15') return 15;
+  return new Date().getDate();          // เดือนนี้ = ตั้งแต่วันที่ 1 ถึงวันนี้
+}
+
+// เงินเดือนเฉลี่ยรายวัน คิดตามจำนวนวันจริงของแต่ละเดือน (30 หรือ 31)
+function salaryForRange(key){
+  const {start} = rangeBounds(key);
+  const n = daysInRange(key);
+  let sum = 0;
+  for(let i=0;i<n;i++){
+    const d = new Date(start); d.setDate(d.getDate()+i);
+    sum += COSTS.salaryTotal / daysInMonth(d);
+  }
+  return sum;
+}
+
+// ── แยกยอดบริการเป็นกลุ่มต้นทุน ────────────────────────────
+function guessGroup(name){
+  const s = (name||'').toLowerCase();
+  if(SPA_WORDS.some(w=>s.includes(w.toLowerCase()))) return 'spa';
+  if(WAX_WORDS.some(w=>s.includes(w.toLowerCase()))) return 'wax';
+  return 'bb';
+}
+
+// คืน {bb, wax, spa} = ยอดบริการแยกกลุ่ม + estimated = true ถ้าเป็นการเดาจากบิลเก่า
+function serviceByGroup(sale){
+  const out = {bb:0, wax:0, spa:0, estimated:false};
+  if(Array.isArray(sale.serviceItems) && sale.serviceItems.length){
+    sale.serviceItems.forEach(it => { out[it.group||'bb'] += (it.price||0); });
+    return out;
+  }
+  // บิลเก่า: เดาจากชื่อบริการ
+  out.estimated = true;
+  const total = sale.serviceTotal!=null ? sale.serviceTotal : (sale.price||0);
+  const names = (sale.service||'').split(',').map(s=>s.trim()).filter(Boolean);
+  if(!names.length){ out.bb += total; return out; }
+  const groups = [...new Set(names.map(guessGroup))];
+  if(groups.length===1){ out[groups[0]] += total; }
+  else { out.bb += total; }     // บิลผสมหลายกลุ่ม แยกราคาไม่ได้ → คิดเป็นฝั่ง BB
+  return out;
+}
+
+function homecareCost(sale){
+  if(!Array.isArray(sale.homecareItems)) return 0;
+  return sale.homecareItems.reduce((sum,it)=>{
+    const unit = COSTS.hcCost[it.id];
+    return sum + (unit ? unit * (it.qty||0) : 0);
+  },0);
+}
+
+// ── คำนวณทั้งช่วง ──────────────────────────────────────────
+function compute(key){
+  const {start,end} = rangeBounds(key);
+  const bills = SALES.filter(s=>{
+    if(s.voided) return false;
+    const d = new Date(s.date);
+    return d>=start && d<=end;
+  });
+
+  let revenue=0, cash=0, transfer=0, svc=0, hc=0, comm=0;
+  let g = {bb:0, wax:0, spa:0};
+  let estimatedBills = 0;
+  const staffMap = {};
+  const svcMap = {};
+  const hcMap = {};
+
+  STAFF.forEach(s=>staffMap[s.id]={...s, bills:0, revenue:0, comm:0});
+
+  bills.forEach(s=>{
+    const paid = s.totalPaid!=null ? s.totalPaid : (s.paid||0);
+    revenue += paid;
+    if(s.payMethod==='transfer') transfer += paid; else cash += paid;
+    svc += (s.serviceTotal!=null ? s.serviceTotal : (s.price||0));
+    hc  += (s.homecareTotal||0);
+
+    const bg = serviceByGroup(s);
+    g.bb += bg.bb; g.wax += bg.wax; g.spa += bg.spa;
+    if(bg.estimated && (s.serviceTotal||s.price)) estimatedBills++;
+
+    const mainComm = s.commission||0;
+    const coComm   = (s.coStaffs||[]).reduce((a,c)=>a+(c.comm||0),0);
+    comm += mainComm + coComm;
+
+    if(s.staffId && staffMap[s.staffId]){
+      staffMap[s.staffId].bills++;
+      staffMap[s.staffId].revenue += paid;
+      staffMap[s.staffId].comm += mainComm;
+    }
+    (s.coStaffs||[]).forEach(c=>{ if(staffMap[c.staffId]) staffMap[c.staffId].comm += (c.comm||0); });
+
+    // บริการที่ขาย
+    if(Array.isArray(s.serviceItems) && s.serviceItems.length){
+      s.serviceItems.forEach(it=>{
+        const k = it.name||'บริการ';
+        if(!svcMap[k]) svcMap[k]={name:k, qty:0, total:0};
+        svcMap[k].qty++; svcMap[k].total += (it.price||0);
+      });
+    } else if(s.service){
+      s.service.split(',').map(x=>x.trim()).filter(Boolean).forEach((nm,i,arr)=>{
+        if(!svcMap[nm]) svcMap[nm]={name:nm, qty:0, total:0};
+        svcMap[nm].qty++;
+        svcMap[nm].total += (s.serviceTotal!=null?s.serviceTotal:(s.price||0))/arr.length;
+      });
+    }
+    // สินค้าโฮมแคร์
+    (s.homecareItems||[]).forEach(it=>{
+      if(!hcMap[it.id]) hcMap[it.id]={id:it.id, name:it.name, qty:0, total:0};
+      hcMap[it.id].qty += (it.qty||0);
+      hcMap[it.id].total += (it.total || (it.unitPrice||0)*(it.qty||0));
+    });
+  });
+
+  const productCost = g.bb*COSTS.rateBB/100 + g.wax*COSTS.rateWax/100 + g.spa*COSTS.rateSpa/100
+                    + bills.reduce((a,s)=>a+homecareCost(s),0);
+  const salary = salaryForRange(key);
+  const profit = revenue - comm - salary - productCost;
+
+  return {
+    bills, count:bills.length, revenue, cash, transfer, svc, hc, comm, salary, productCost, profit,
+    groups:g, estimatedBills,
+    avg: bills.length ? revenue/bills.length : 0,
+    staff: Object.values(staffMap),
+    services: Object.values(svcMap).sort((a,b)=>b.total-a.total),
+    homecare: Object.values(hcMap).sort((a,b)=>b.total-a.total),
+    salaryDaily: salaryForRange('today'),
+    days: daysInRange(key)
+  };
+}
+
+// 7 วันล่าสุด สำหรับกราฟ
+function last7(){
+  const out=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const key=d.toDateString();
+    const rev = SALES.filter(s=>!s.voided && new Date(s.date).toDateString()===key)
+                     .reduce((a,s)=>a+(s.totalPaid!=null?s.totalPaid:(s.paid||0)),0);
+    const n = SALES.filter(s=>!s.voided && new Date(s.date).toDateString()===key).length;
+    out.push({date:d, rev, n, label:d.toLocaleDateString('th-TH',{weekday:'short'}), full:d.toLocaleDateString('th-TH',{day:'numeric',month:'short'})});
+  }
+  return out;
+}
+
+// ── หน้าจอ ─────────────────────────────────────────────────
+function renderRanges(){
+  el('ranges').innerHTML = RANGES.map(r=>
+    `<button class="rbtn${r.key===range?' on':''}" onclick="setRange('${r.key}')">${r.label}</button>`).join('');
+}
+
+function setRange(k){ range=k; renderRanges(); render(); }
+window.setRange = setRange;
+
+function render(){
+  if(!dataReady) return;
+  const d = compute(range);
+  const rangeLabel = RANGES.find(r=>r.key===range).label;
+  const app = el('app');
+
+  if(!d.count){
+    app.innerHTML = `<div class="card"><div class="state" style="padding:36px 10px">
+      <div style="font-size:1.8rem;margin-bottom:6px">✨</div>ยังไม่มีบิลในช่วง "${rangeLabel}" ค่ะ</div></div>`
+      + chartCard();
+    bindChart();
+    return;
+  }
+
+  const costs = [
+    {k:'กำไร',       v:Math.max(0,d.profit), c:'var(--c-profit)'},
+    {k:'ค่าคอม',     v:d.comm,               c:'var(--c-comm)'},
+    {k:'เงินเดือน',  v:d.salary,             c:'var(--c-salary)'},
+    {k:'ผลิตภัณฑ์',  v:d.productCost,        c:'var(--c-product)'},
+  ];
+  const stackTotal = costs.reduce((a,x)=>a+x.v,0) || 1;
+  const pct = d.revenue ? (d.profit/d.revenue*100) : 0;
+
+  app.innerHTML = `
+  <!-- ยอดขาย -->
+  <div class="card">
+    <div class="hero-label">ยอดขาย · ${rangeLabel}</div>
+    <div class="hero-num">${B(d.revenue)}<small>฿</small></div>
+    <div class="hero-sub">${d.count} บิล · เฉลี่ย ${B(d.avg)} ฿/บิล</div>
+    <div class="split">
+      <div><div class="k">💵 เงินสด</div><div class="v">${B(d.cash)} ฿</div></div>
+      <div><div class="k">📱 โอนเงิน</div><div class="v">${B(d.transfer)} ฿</div></div>
+    </div>
+    <div class="split">
+      <div><div class="k">บริการ</div><div class="v">${B(d.svc)} ฿</div></div>
+      <div><div class="k">🛍️ สินค้าโฮมแคร์</div><div class="v">${B(d.hc)} ฿</div></div>
+    </div>
+  </div>
+
+  <!-- กำไร -->
+  <div class="card">
+    <div class="card-h">💰 กำไรเหลือ <em>ตัวเลขดิบ ยังไม่หักค่าเช่า/น้ำไฟ</em></div>
+    <div><span class="profit-num">${B(d.profit)} ฿</span><span class="profit-pct">${pct.toFixed(0)}% ของยอดขาย</span></div>
+    <div class="stack">
+      ${costs.map(c=>`<div class="seg" style="width:${(c.v/stackTotal*100).toFixed(2)}%;background:${c.c}"></div>`).join('')}
+    </div>
+    <div class="legend">
+      ${costs.map(c=>`<div class="lg"><span class="sw" style="background:${c.c}"></span>${c.k} <b>${B(c.v)} ฿</b></div>`).join('')}
+    </div>
+    <div class="warn">
+      เงินเดือนคิดเฉลี่ยรายวัน ${B(d.salaryDaily)} ฿/วัน × ${d.days} วัน ·
+      ผลิตภัณฑ์ BB ${COSTS.rateBB}% · แว็กซ์ ${COSTS.rateWax}% · สปา ${COSTS.rateSpa}%
+      ${Object.keys(COSTS.hcCost).length ? '· ทุนสินค้าตามที่กรอกไว้' : '· <b>ยังไม่ได้กรอกทุนสินค้าโฮมแคร์</b> (กดเฟือง ⚙️)'}
+      ${d.estimatedBills ? `<br>⚠️ มี ${d.estimatedBills} บิลเก่าที่ยังไม่มีรายละเอียดรายบรรทัด ระบบเดากลุ่มจากชื่อบริการให้` : ''}
+    </div>
+  </div>
+
+  <!-- พนักงาน -->
+  <div class="card">
+    <div class="card-h">👥 พนักงาน <em>${rangeLabel}</em></div>
+    <div class="staff">
+      ${d.staff.map(s=>{
+        const salaryShare = d.salary/d.staff.length;
+        return `<div class="sc">
+          <div class="sc-top">
+            <div class="av" style="background:${s.bg}">${s.name.slice(0,2)}</div>
+            <div><div class="sc-nm">${s.name}</div><div class="sc-rl">${s.role}</div></div>
+          </div>
+          <div class="sc-grid">
+            <div><div class="sc-k">บิล</div><div class="sc-v">${s.bills}</div></div>
+            <div><div class="sc-k">ยอดขาย</div><div class="sc-v">${B(s.revenue)}</div></div>
+            <div><div class="sc-k">ค่าคอม</div><div class="sc-v" style="color:var(--c-comm)">${B(s.comm)}</div></div>
+            <div><div class="sc-k">+เงินเดือน</div><div class="sc-v" style="color:var(--c-salary)">${B(salaryShare)}</div></div>
+          </div>
+          <div style="text-align:right;font-size:0.76rem;color:var(--text-secondary);margin-top:7px">
+            รวมที่ได้รับช่วงนี้ <b style="color:var(--text-primary)">${B(s.comm + salaryShare)} ฿</b>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+
+  <!-- บริการ -->
+  <div class="card">
+    <div class="card-h">✨ บริการที่ขาย <em>${rangeLabel}</em></div>
+    ${d.services.slice(0,12).map(s=>`
+      <div class="row">
+        <div class="nm">${s.name}</div>
+        <div class="qty">×${s.qty}</div>
+        <div class="amt">${B(s.total)} ฿</div>
+      </div>`).join('') || '<div style="color:var(--text-muted);font-size:0.85rem">ไม่มีรายการ</div>'}
+    ${d.services.length>12?`<div style="text-align:center;font-size:0.72rem;color:var(--text-muted);padding-top:8px">และอีก ${d.services.length-12} รายการ</div>`:''}
+  </div>
+
+  <!-- โฮมแคร์ -->
+  ${d.homecare.length?`
+  <div class="card">
+    <div class="card-h">🛍️ สินค้าโฮมแคร์ <em>${rangeLabel}</em></div>
+    ${d.homecare.map(h=>{
+      const unit = COSTS.hcCost[h.id];
+      const profit = unit ? h.total - unit*h.qty : null;
+      return `<div class="row">
+        <div class="nm">${h.name}${profit!=null?`<small>กำไร ${B(profit)} ฿</small>`:'<small>ยังไม่ได้กรอกทุน</small>'}</div>
+        <div class="qty">×${h.qty}</div>
+        <div class="amt">${B(h.total)} ฿</div>
+      </div>`;
+    }).join('')}
+  </div>`:''}
+
+  ${chartCard()}
+  <div style="text-align:center;font-size:0.68rem;color:var(--text-muted);padding:4px 0 10px">
+    แดชบอร์ด v${APP_VERSION} · อ่านข้อมูลจากระบบ POS โดยตรง
+  </div>`;
+
+  bindChart();
+}
+
+function chartCard(){
+  const days = last7();
+  const max = Math.max(...days.map(d=>d.rev), 1);
+  return `
+  <div class="card">
+    <div class="card-h">📈 7 วันล่าสุด <em>รวม ${B(days.reduce((a,d)=>a+d.rev,0))} ฿</em></div>
+    <div class="chart" id="chart">
+      ${days.map((d,i)=>`
+        <div class="col${d.rev===max&&d.rev>0?' top':''}" data-i="${i}" data-rev="${d.rev}" data-n="${d.n}" data-full="${d.full}">
+          ${d.rev>0?`<div class="dlabel">${d.rev>=1000?(d.rev/1000).toFixed(1)+'k':d.rev}</div>`:''}
+          <div class="bar" style="height:${d.rev/max*100}%"></div>
+        </div>`).join('')}
+      <div class="tip" id="tip"></div>
+    </div>
+    <div class="xlab">${days.map(d=>`<div>${d.label}</div>`).join('')}</div>
+  </div>`;
+}
+
+function bindChart(){
+  const chart = el('chart'); if(!chart) return;
+  const tip = el('tip');
+  chart.querySelectorAll('.col').forEach(col=>{
+    const show = e=>{
+      const r = chart.getBoundingClientRect();
+      const c = col.getBoundingClientRect();
+      tip.innerHTML = `${col.dataset.full} · ${B(+col.dataset.rev)} ฿ · ${col.dataset.n} บิล`;
+      tip.style.left = (c.left - r.left + c.width/2)+'px';
+      tip.style.top  = (c.top - r.top - 6)+'px';
+      tip.classList.add('on');
+    };
+    const hide = ()=>tip.classList.remove('on');
+    col.addEventListener('mouseenter', show);
+    col.addEventListener('mouseleave', hide);
+    col.addEventListener('touchstart', e=>{ show(e); setTimeout(hide, 2200); }, {passive:true});
+  });
+}
+
+// ── ตั้งค่า ────────────────────────────────────────────────
+function openSettings(){
+  el('settings-body').innerHTML = `
+    <div class="sec-t">เงินเดือน</div>
+    <div class="fld">
+      <label>เงินเดือนรวมทั้งทีม<small>ต่อเดือน · ระบบจะเฉลี่ยเป็นรายวันให้</small></label>
+      <input type="number" id="set-salary" value="${COSTS.salaryTotal}">
+    </div>
+
+    <div class="sec-t">ต้นทุนผลิตภัณฑ์ (% ของยอดบริการ)</div>
+    <div class="fld"><label>งานฝั่ง BB ทั้งหมด</label><input type="number" id="set-bb" value="${COSTS.rateBB}"></div>
+    <div class="fld"><label>งานแว็กซ์</label><input type="number" id="set-wax" value="${COSTS.rateWax}"></div>
+    <div class="fld"><label>งานสปา</label><input type="number" id="set-spa" value="${COSTS.rateSpa}"></div>
+
+    <div class="sec-t">ทุนสินค้าโฮมแคร์ (บาท/ชิ้น)</div>
+    <p class="note" style="margin:2px 0 6px">กรอกเฉพาะตัวที่รู้ราคาทุนก็ได้ ตัวที่เว้นว่างระบบจะไม่นับเป็นต้นทุน</p>
+    ${HOMECARE.map(h=>`
+      <div class="fld">
+        <label>${h.name}<small>ขาย ${h.price} ฿</small></label>
+        <input type="number" id="hc-${h.id}" placeholder="ทุน" value="${COSTS.hcCost[h.id]??''}">
+      </div>`).join('')}`;
+  el('ov').classList.add('on');
+}
+function closeSettings(){ el('ov').classList.remove('on'); }
+
+async function saveSettings(){
+  const num = (id,def) => { const v=parseFloat(el(id).value); return isNaN(v)?def:v; };
+  const hc = {};
+  HOMECARE.forEach(h=>{
+    const v = parseFloat(el('hc-'+h.id).value);
+    if(!isNaN(v) && v>=0) hc[h.id]=v;
+  });
+  const next = {
+    salaryTotal: num('set-salary', DEFAULTS.salaryTotal),
+    rateBB: num('set-bb', DEFAULTS.rateBB),
+    rateWax: num('set-wax', DEFAULTS.rateWax),
+    rateSpa: num('set-spa', DEFAULTS.rateSpa),
+    hcCost: hc
+  };
+  COSTS = next;
+  try{
+    await window.saveCosts(next);
+    toast('✅ บันทึกแล้ว ใช้ได้ทุกเครื่อง');
+  }catch(e){
+    toast('⚠️ บันทึกขึ้นระบบไม่ได้ ใช้เฉพาะเครื่องนี้');
+  }
+  try{ localStorage.setItem('bbg_dash_costs', JSON.stringify(next)); }catch(e){}
+  closeSettings();
+  render();
+}
+window.openSettings = openSettings;
+window.closeSettings = closeSettings;
+window.saveSettings = saveSettings;
+
+// ── เริ่มทำงาน ─────────────────────────────────────────────
+try{
+  const cached = localStorage.getItem('bbg_dash_costs');
+  if(cached) COSTS = {...DEFAULTS, ...JSON.parse(cached)};
+}catch(e){}
+
+renderRanges();
+
+function boot(){
+  window.listenSales(rows=>{
+    SALES = rows;
+    dataReady = true;
+    el('live-txt').textContent = 'สด ' + new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+    render();
+  });
+  window.listenCosts(data=>{
+    if(data){
+      COSTS = {...DEFAULTS, ...data, hcCost:{...(data.hcCost||{})}};
+      try{ localStorage.setItem('bbg_dash_costs', JSON.stringify(COSTS)); }catch(e){}
+      if(dataReady) render();
+    }
+  });
+}
+if(window.dbReady) boot(); else window.addEventListener('dbReady', boot);
+
+setTimeout(()=>{
+  if(!dataReady) el('app').innerHTML =
+    `<div class="card"><div class="state">เชื่อมต่อฐานข้อมูลไม่ได้ค่ะ<br>
+     <span style="font-size:0.78rem">ลองรีเฟรชหน้านี้อีกครั้ง หรือเช็คอินเทอร์เน็ต</span></div></div>`;
+}, 12000);
+</script>
+</body>
+</html>

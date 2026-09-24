@@ -1,180 +1,194 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<title>BB GLOW — แดชบอร์ดผู้บริหาร</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ภาพรวม 2 กิจการ — อาจารย์กอล์ฟ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  color-scheme: light;
-  --gold:#C9A96E; --gold-dark:#9A7A2A; --gold-light:#E8D5A8;
-  --brown:#6A4A2A; --crimson:#8B1A2A;
-  --bg:#FFFDF8; --surface-1:#FFFFFF; --surface-2:#FFF7EA;
-  --border:rgba(201,169,110,0.28);
-  --text-primary:#3A2A18; --text-secondary:#6A5A48; --text-muted:#9A8878;
-  --shadow:0 2px 14px rgba(106,74,42,0.07);
-  /* สีข้อมูล (ผ่านการตรวจ contrast/ตาบอดสีแล้ว) */
-  --c-profit:#1baf7a; --c-comm:#2a78d6; --c-salary:#4a3aa7; --c-product:#eda100;
-  --c-bar:#C9A96E; --c-bar-top:#9A7A2A;
+  --bg:#FAF6EF; --surface-1:#FFFFFF; --surface-2:#F5EDE0;
+  --border:rgba(154,122,42,.22);
+  --text-primary:#2A1F14; --text-secondary:#5C4A34; --text-muted:#8A7659;
+  --gold:#9A7A2A; --gold-soft:#C9A96E;
+  --c-bb:#a8791c;        /* BB Glow */
+  --c-sam:#b03a2e;       /* สำนัก */
+  --c-profit:#1b7a58; --c-comm:#2a78d6; --c-salary:#4a3aa7; --c-product:#b57600;
+  --shadow:0 1px 3px rgba(80,50,10,.07), 0 6px 18px rgba(80,50,10,.06);
+  --r:16px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme: dark;
     --bg:#16120E; --surface-1:#221B14; --surface-2:#2B2219;
-    --border:rgba(201,169,110,0.22);
-    --text-primary:#F6EEE2; --text-secondary:#CDBCA6; --text-muted:#9A8878;
-    --shadow:0 2px 16px rgba(0,0,0,0.4);
-    --c-profit:#199e70; --c-comm:#3987e5; --c-salary:#9085e9; --c-product:#c98500;
-    --c-bar:#A98A50; --c-bar-top:#E8C87A;
+    --border:rgba(201,169,110,.2);
+    --text-primary:#F6EEE0; --text-secondary:#D3C3A8; --text-muted:#9E8B70;
+    --gold:#E8C87A; --gold-soft:#A98A50;
+    --c-bb:#c9962c; --c-sam:#cf5b4e;
+    --c-profit:#3fc194; --c-comm:#6ba8ee; --c-salary:#9085e9; --c-product:#e0a534;
+    --shadow:0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
   }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{
-  margin:0; background:var(--bg); color:var(--text-primary);
-  font-family:'Sarabun',system-ui,-apple-system,sans-serif;
-  padding:0 0 40px; font-size:15px;
-  padding-top:env(safe-area-inset-top);
-}
-.wrap{max-width:820px;margin:0 auto;padding:0 16px}
+body{margin:0;background:var(--bg);color:var(--text-primary);
+  font-family:'Sarabun',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;
+  padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+button{font-family:inherit;cursor:pointer;border:none}
+input{font-family:inherit;font-size:1rem}
+.hide{display:none !important}
+.wrap{max-width:820px;margin:0 auto;padding:16px 16px 0}
 
-/* ── หัว ── */
-header{padding:18px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-.brand{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--brown);line-height:1.1}
-.brand span{color:var(--gold-dark)}
-.sub{font-size:0.72rem;color:var(--text-muted);margin-top:2px}
-.live{display:flex;align-items:center;gap:5px;font-size:0.7rem;color:var(--text-muted);white-space:nowrap}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--c-profit);box-shadow:0 0 0 0 rgba(27,175,122,0.5);animation:pulse 2.4s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(27,175,122,0.45)}70%{box-shadow:0 0 0 7px rgba(27,175,122,0)}100%{box-shadow:0 0 0 0 rgba(27,175,122,0)}}
-.gear{background:none;border:1px solid var(--border);border-radius:9px;padding:5px 9px;font-size:0.95rem;cursor:pointer;color:var(--text-secondary)}
+/* header */
+header{display:flex;align-items:center;gap:10px;padding:14px 16px 4px;max-width:820px;margin:0 auto}
+header .ttl{flex:1;min-width:0}
+header h1{margin:0;font-size:1.12rem;font-weight:700;letter-spacing:-.2px}
+header .sub{font-size:.8rem;color:var(--text-muted)}
+.iconbtn{background:var(--surface-1);border:1px solid var(--border);border-radius:11px;
+  width:40px;height:40px;font-size:1.1rem;color:var(--text-secondary);flex:0 0 auto}
 
-/* ── ปุ่มช่วงเวลา ── */
-.ranges{display:flex;gap:6px;margin:4px 0 14px;overflow-x:auto;scrollbar-width:none}
-.ranges::-webkit-scrollbar{display:none}
-.rbtn{flex:1;min-width:76px;padding:9px 6px;border-radius:11px;border:1.5px solid var(--border);
-  background:var(--surface-1);color:var(--text-secondary);font-family:inherit;font-size:0.82rem;font-weight:600;cursor:pointer;white-space:nowrap}
-.rbtn.on{background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-color:var(--gold-dark);color:#fff;box-shadow:0 3px 10px rgba(154,122,42,0.25)}
+/* range */
+.ranges{display:flex;gap:7px;overflow-x:auto;padding:12px 16px 2px;max-width:820px;margin:0 auto;
+  -webkit-overflow-scrolling:touch}
+.ranges button{padding:9px 16px;border-radius:22px;background:var(--surface-1);
+  border:1px solid var(--border);color:var(--text-secondary);font-size:.92rem;white-space:nowrap;flex:0 0 auto}
+.ranges button.on{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:600}
 
-/* ── การ์ด ── */
-.card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
-.card-h{font-size:0.78rem;font-weight:700;color:var(--text-secondary);letter-spacing:0.3px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.card-h em{font-style:normal;font-weight:400;color:var(--text-muted);font-size:0.72rem}
+/* cards */
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;box-shadow:var(--shadow);margin-bottom:12px}
+.lb{font-size:.82rem;color:var(--text-muted)}
+.hero .lb{font-size:.86rem}
+.hero .big{font-size:2.5rem;font-weight:700;letter-spacing:-1px;line-height:1.1;margin:4px 0 2px}
+.hero .big small{font-size:1.1rem;font-weight:500;color:var(--text-muted);margin-left:4px}
+.herorow{display:flex;gap:14px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
+  flex-wrap:wrap}
+.herorow>div{flex:1;min-width:110px}
+.herorow .v{font-size:1.3rem;font-weight:700;margin-top:2px}
 
-/* ── ยอดขาย ── */
-.hero-label{font-size:0.75rem;color:var(--text-muted)}
-.hero-num{font-family:'Playfair Display',serif;font-size:2.7rem;font-weight:700;color:var(--brown);line-height:1.05;margin:2px 0 4px;letter-spacing:-1px}
-.hero-num small{font-size:1.1rem;font-weight:600;margin-left:3px;color:var(--gold-dark)}
-.hero-sub{font-size:0.8rem;color:var(--text-secondary)}
-.split{display:flex;gap:8px;margin-top:12px}
-.split>div{flex:1;background:var(--surface-2);border-radius:11px;padding:9px 11px}
-.split .k{font-size:0.68rem;color:var(--text-muted)}
-.split .v{font-size:1rem;font-weight:700;color:var(--text-primary);margin-top:1px}
+/* split bar */
+.splitbar{display:flex;height:12px;border-radius:7px;overflow:hidden;margin:14px 0 9px;gap:2px;
+  background:var(--surface-2)}
+.splitbar i{display:block;height:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.86rem;color:var(--text-secondary)}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
 
-/* ── กำไร ── */
-.profit-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1.1;color:var(--c-profit)}
-.profit-pct{font-size:0.95rem;font-weight:700;color:var(--text-secondary);margin-left:6px}
-.stack{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:12px 0 10px;background:var(--surface-2);gap:2px}
-.seg{position:relative;min-width:2px;transition:width .4s ease}
-.legend{display:flex;flex-wrap:wrap;gap:8px 14px}
-.lg{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-secondary)}
-.sw{width:11px;height:11px;border-radius:3px;flex-shrink:0}
-.lg b{color:var(--text-primary);font-weight:700}
+/* two business cards */
+.two{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){ .two{grid-template-columns:1fr 1fr} }
+.bizhead{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.bizhead .dot{width:12px;height:12px;border-radius:4px}
+.bizhead h2{margin:0;font-size:1.02rem;font-weight:700}
+.bignum{font-size:1.9rem;font-weight:700;letter-spacing:-.5px;line-height:1.15}
+.sub2{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.sub2>div{flex:1;min-width:88px}
+.sub2 .v{font-size:1.05rem;font-weight:600;margin-top:1px}
+.pf{margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+.pfline{display:flex;justify-content:space-between;font-size:.9rem;padding:4px 0;color:var(--text-secondary)}
+.pfline b{color:var(--text-primary);font-weight:600}
+.pfline.tot{border-top:1px dashed var(--border);margin-top:6px;padding-top:9px;font-size:1rem}
+.pfline.tot b{color:var(--c-profit);font-size:1.15rem}
 
-/* ── ตาราง/แถว ── */
-.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
-.row:last-child{border-bottom:none}
-.row .nm{flex:1;font-size:0.86rem;color:var(--text-primary)}
-.row .nm small{display:block;color:var(--text-muted);font-size:0.7rem;margin-top:1px}
-.row .qty{font-size:0.75rem;color:var(--text-muted);white-space:nowrap}
-.row .amt{font-weight:700;font-size:0.92rem;color:var(--gold-dark);min-width:74px;text-align:right;white-space:nowrap}
+/* chart */
+.bars{display:flex;align-items:flex-end;gap:5px;height:160px;margin-top:6px}
+.bcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;
+  gap:3px;min-width:0}
+.bstack{width:100%;max-width:46px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%}
+.bstack i{display:block;width:100%;border-radius:3px}
+.bstack i.top{border-radius:5px 5px 3px 3px}
+.bval{font-size:.68rem;color:var(--text-muted);white-space:nowrap}
+.bxs{display:flex;gap:5px;margin-top:7px}
+.bxs>div{flex:1;text-align:center;font-size:.75rem;color:var(--text-muted);min-width:0}
 
-/* ── พนักงาน ── */
-.staff{display:grid;gap:10px}
-.sc{background:var(--surface-2);border-radius:13px;padding:13px}
-.sc-top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
-.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:0.85rem;flex-shrink:0}
-.sc-nm{font-weight:700;font-size:0.92rem}
-.sc-rl{font-size:0.7rem;color:var(--text-muted)}
-.sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;text-align:center}
-.sc-grid>div{background:var(--surface-1);border-radius:9px;padding:7px 3px}
-.sc-k{font-size:0.62rem;color:var(--text-muted)}
-.sc-v{font-size:0.88rem;font-weight:700;margin-top:1px}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th{text-align:left;font-weight:500;color:var(--text-muted);font-size:.8rem;padding:8px 6px;
+  border-bottom:1px solid var(--border)}
+td{padding:10px 6px;border-bottom:1px solid var(--border)}
+td.n{text-align:right;white-space:nowrap}
+td.g{font-weight:700;color:var(--gold)}
+tr:last-child td{border-bottom:none}
+h3.sec{font-size:.86rem;color:var(--text-muted);font-weight:500;margin:22px 0 10px;
+  display:flex;align-items:center;gap:9px}
+h3.sec::after{content:"";flex:1;height:1px;background:var(--border)}
 
-/* ── กราฟ ── */
-.chart{position:relative;height:150px;display:flex;align-items:flex-end;gap:5px;padding-top:22px}
-.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;cursor:default;position:relative}
-.bar{width:100%;background:var(--c-bar);border-radius:4px 4px 0 0;min-height:2px;transition:height .45s ease}
-.col.top .bar{background:var(--c-bar-top)}
-.col .dlabel{font-size:0.63rem;color:var(--text-muted);white-space:nowrap;margin-bottom:3px;line-height:1}
-.xlab{display:flex;gap:5px;margin-top:7px}
-.xlab div{flex:1;text-align:center;font-size:0.65rem;color:var(--text-muted)}
-.tip{position:absolute;pointer-events:none;background:var(--text-primary);color:var(--bg);font-size:0.72rem;
-  padding:5px 9px;border-radius:7px;white-space:nowrap;opacity:0;transition:opacity .15s;transform:translate(-50%,-100%);z-index:5}
-.tip.on{opacity:1}
+.staff{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--border)}
+.staff:last-child{border-bottom:none}
+.av{width:38px;height:38px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;
+  justify-content:center;color:#fff;font-weight:700;font-size:.9rem}
+.staff .nm{flex:1;min-width:0}
+.staff .nm b{display:block;font-size:.98rem}
+.staff .nm span{font-size:.8rem;color:var(--text-muted)}
+.staff .amt{text-align:right;white-space:nowrap}
+.staff .amt b{display:block;font-size:1.02rem}
+.staff .amt span{font-size:.78rem;color:var(--text-muted)}
 
-/* ── สถานะ ── */
-.state{text-align:center;padding:50px 20px;color:var(--text-muted);font-size:0.88rem}
-.spin{width:26px;height:26px;border:3px solid var(--border);border-top-color:var(--gold-dark);border-radius:50%;margin:0 auto 12px;animation:sp .8s linear infinite}
+.note{font-size:.85rem;color:var(--text-muted);line-height:1.55}
+.warn{background:rgba(181,118,0,.1);border:1px solid rgba(181,118,0,.35);border-radius:12px;
+  padding:11px 13px;font-size:.87rem;color:var(--text-secondary);margin-bottom:12px}
+.empty{text-align:center;color:var(--text-muted);padding:20px 0;font-size:.95rem}
+#loading{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.spin{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--gold);
+  border-radius:50%;margin:0 auto 14px;animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 
-/* ── ตั้งค่า ── */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:flex-end;justify-content:center;z-index:50;backdrop-filter:blur(2px)}
-.ov.on{display:flex}
-.sheet{background:var(--bg);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom))}
-.sheet h3{margin:0 0 4px;font-size:1.05rem;color:var(--brown)}
-.sheet p.note{font-size:0.75rem;color:var(--text-muted);margin:0 0 16px;line-height:1.6}
-.fld{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
-.fld label{flex:1;font-size:0.84rem}
-.fld label small{display:block;color:var(--text-muted);font-size:0.68rem}
-.fld input{width:96px;padding:7px 9px;border:1.5px solid var(--border);border-radius:9px;background:var(--surface-1);
-  color:var(--text-primary);font-family:inherit;font-size:0.9rem;text-align:right}
-.sec-t{font-size:0.78rem;font-weight:700;color:var(--gold-dark);margin:18px 0 4px}
-.btn{width:100%;padding:13px;border:none;border-radius:13px;font-family:inherit;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:16px}
-.btn-p{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff}
-.btn-s{background:transparent;color:var(--text-secondary);border:1.5px solid var(--border);margin-top:8px}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:var(--text-primary);color:var(--bg);
-  padding:11px 18px;border-radius:11px;font-size:0.85rem;opacity:0;transition:all .3s;z-index:99}
-.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-.warn{background:var(--surface-2);border:1px dashed var(--gold);border-radius:11px;padding:10px 12px;font-size:0.75rem;color:var(--text-secondary);margin-top:10px;line-height:1.6}
-@media(min-width:680px){
-  .staff{grid-template-columns:1fr 1fr}
-  .hero-num{font-size:3.1rem}
-}
+/* settings sheet */
+#sheet{position:fixed;inset:0;background:rgba(20,12,4,.55);z-index:90;display:flex;
+  align-items:flex-end;justify-content:center}
+.sheetbox{background:var(--surface-1);width:100%;max-width:560px;border-radius:20px 20px 0 0;
+  padding:20px 18px calc(24px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
+.sheetbox h2{margin:0 0 4px;font-size:1.1rem}
+.frow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.frow label{flex:1;font-size:.94rem}
+.frow input{width:96px;padding:9px 11px;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface-2);color:var(--text-primary);text-align:right}
+.btnrow{display:flex;gap:9px;margin-top:18px}
+.btnrow button{flex:1;padding:14px;border-radius:12px;font-size:1rem;font-weight:600}
+.btnrow .cancel{background:var(--surface-2);color:var(--text-primary)}
+.btnrow .save{background:var(--gold);color:var(--bg)}
 </style>
 </head>
 <body>
-<div class="wrap">
+
+<div id="loading"><div class="spin"></div>กำลังโหลดข้อมูล…</div>
+
+<div id="app" class="hide">
   <header>
-    <div>
-      <div class="brand">BB <span>GLOW</span></div>
-      <div class="sub">แดชบอร์ดผู้บริหาร · ครบวงจร หัวหิน</div>
+    <div class="ttl">
+      <h1>ภาพรวม 2 กิจการ</h1>
+      <div class="sub">BB Glow หัวหิน · สำนักบ้านนนทภักดิ์</div>
     </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <div class="live"><span class="dot"></span><span id="live-txt">กำลังเชื่อม...</span></div>
-      <button class="gear" onclick="openSettings()" aria-label="ตั้งค่า">⚙️</button>
-    </div>
+    <button class="iconbtn" id="gear" title="ตั้งค่าต้นทุน">⚙️</button>
   </header>
 
-  <div class="ranges" id="ranges"></div>
-  <div id="app"><div class="state"><div class="spin"></div>กำลังโหลดข้อมูล...</div></div>
+  <div class="ranges" id="ranges">
+    <button data-r="today" class="on">วันนี้</button>
+    <button data-r="d7">7 วัน</button>
+    <button data-r="d15">15 วัน</button>
+    <button data-r="month">เดือนนี้</button>
+  </div>
+
+  <div class="wrap" id="body"></div>
 </div>
 
-<div class="ov" id="ov" onclick="if(event.target===this)closeSettings()">
-  <div class="sheet">
-    <h3>⚙️ ตั้งค่าตัวเลขต้นทุน</h3>
-    <p class="note">ตัวเลขพวกนี้ใช้คำนวณกำไร แก้เมื่อไหร่ก็ได้ · บันทึกแล้วจะใช้ร่วมกันทุกเครื่อง</p>
-    <div id="settings-body"></div>
-    <button class="btn btn-p" onclick="saveSettings()">บันทึก</button>
-    <button class="btn btn-s" onclick="closeSettings()">ปิด</button>
+<!-- settings -->
+<div id="sheet" class="hide">
+  <div class="sheetbox">
+    <h2>ตั้งค่าต้นทุน</h2>
+    <p class="note">ใช้ค่าชุดเดียวกับแดชบอร์ด BB Glow ตัวเดิม แก้ที่นี่แล้วอีกตัวเปลี่ยนตาม · ฝั่งสำนักไม่คิดต้นทุน ตามที่อาจารย์สั่ง</p>
+    <div id="fields"></div>
+    <div class="btnrow">
+      <button class="cancel" id="sclose">ปิด</button>
+      <button class="save" id="ssave">บันทึก</button>
+    </div>
   </div>
 </div>
-<div class="toast" id="toast"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -185,22 +199,19 @@ const firebaseConfig = {
   messagingSenderId: "714462283652",
   appId: "1:714462283652:web:088c6ddde11f46fc08ffd1"
 };
-// ── สวิตช์สำหรับตอนที่อาจารย์ทำ Firebase Authentication เสร็จแล้ว ──
-// ตั้ง enabled: true แล้วใส่บัญชีสำหรับ "ดูอย่างเดียว" ที่สร้างไว้ใน Firebase
-// แดชบอร์ดจะล็อกอินให้เองเงียบ ๆ (อาจารย์ไม่ต้องกรอกอะไร) แต่คนที่ไม่มีไฟล์นี้จะดึงข้อมูลไม่ได้
+// เผื่ออนาคตที่ปิด Firestore Rules แล้วต้องล็อกอิน (เหมือนแดชบอร์ดตัวเดิม)
 const DASH_AUTH = { enabled:false, email:'dashboard@bbglow.local', password:'' };
 
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
-
 async function ensureAuth(){
   if(!DASH_AUTH.enabled) return;
   try{ await signInWithEmailAndPassword(getAuth(app), DASH_AUTH.email, DASH_AUTH.password); }
   catch(e){ console.warn('เข้าระบบอ่านข้อมูลไม่สำเร็จ', e.code||e); }
 }
-
-window.listenSales = cb => onSnapshot(collection(db,'sales'), s=>cb(s.docs.map(d=>d.data())));
-window.listenCosts = cb => onSnapshot(doc(db,'config','costs'), s=>cb(s.exists()?s.data():null));
+window.listenBB    = cb => onSnapshot(collection(db,'sales'),        s=>cb(s.docs.map(d=>d.data())));
+window.listenSam   = cb => onSnapshot(collection(db,'samnak_sales'), s=>cb(s.docs.map(d=>d.data())));
+window.listenCosts = cb => onSnapshot(doc(db,'config','costs'),      s=>cb(s.exists()?s.data():null));
 window.saveCosts   = data => setDoc(doc(db,'config','costs'), data);
 await ensureAuth();
 window.dbReady = true;
@@ -208,81 +219,57 @@ window.dispatchEvent(new Event('dbReady'));
 </script>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-//  แดชบอร์ดผู้บริหาร BB GLOW  ·  v1.0 · 17 ก.ย. 69
-//  อ่านข้อมูลบิลจากระบบ POS อย่างเดียว ไม่แก้ไขอะไรในบิล
-// ═══════════════════════════════════════════════════════════
-const APP_VERSION = '1.0 · 17 ก.ย. 69';
+/* ═══════════════════════════════════════════════════════════
+   แดชบอร์ดรวม 2 กิจการ · v1.0 · 24 ก.ย. 69 · อัมรินทร์
+   BB Glow  → collection `sales`         (สูตรกำไรเดียวกับแดชบอร์ดเดิม)
+   สำนัก    → collection `samnak_sales`  (ไม่คิดต้นทุน: ยอดขาย = กำไร)
+   ═══════════════════════════════════════════════════════════ */
 
-// ── ค่าตั้งต้น (แก้ได้ในหน้าตั้งค่า) ───────────────────────
 const DEFAULTS = {
-  salaryTotal: 22000,          // เงินเดือนรวมทั้งทีมต่อเดือน
-  rateBB: 13, rateWax: 7, rateSpa: 7,   // ต้นทุนผลิตภัณฑ์ (% ของยอดบริการ)
-  hcCost: {}                   // ทุนสินค้าโฮมแคร์ต่อชิ้น (บาท) — อาจารย์กรอกเอง
+  salaryTotal: 22000,                  // เงินเดือนรวมทีม BB Glow ต่อเดือน
+  rateBB: 13, rateWax: 7, rateSpa: 7,  // ต้นทุนผลิตภัณฑ์ (% ของยอดบริการ)
+  hcCost: {}                           // ทุนสินค้าโฮมแคร์ต่อชิ้น
 };
 let COSTS = {...DEFAULTS};
 
 const STAFF = [
-  {id:'S2', name:'คุณเอ', role:'พนักงาน', bg:'linear-gradient(135deg,#3A6B47,#6B9E78)'},
-  {id:'S3', name:'หญิง',  role:'พนักงาน', bg:'linear-gradient(135deg,#A05040,#D4846A)'},
+  {id:'S2', name:'คุณเอ', bg:'linear-gradient(135deg,#3A6B47,#6B9E78)'},
+  {id:'S3', name:'หญิง',  bg:'linear-gradient(135deg,#A05040,#D4846A)'},
 ];
-
-// สินค้าโฮมแคร์ (ราคาขาย — ตรงกับใน POS)
 const HOMECARE = [
-  {id:'foam_pinn',   name:'โฟมล้างหน้า',       price:370},
-  {id:'moist_pinn',  name:'มอยด์เจอร์',         price:350},
-  {id:'adv_pinn',    name:'แอดวานซ์เซรั่ม',     price:390},
-  {id:'mask_uv',     name:'แมสยูวี',             price:159},
-  {id:'spray_spf',   name:'สเปรย์กันแดด',       price:550},
-  {id:'mask_face',   name:'มาร์กหน้า',           price:9},
-  {id:'essence_wax', name:'เอสเซ้น ผิวแข็งแรง', price:490},
-  {id:'scrub_wax',   name:'สครับ',               price:300},
-  {id:'mask_wax',    name:'มาร์ค',               price:300},
-  {id:'gel_ua',      name:'เจล รักแร้',          price:289},
-  {id:'after_gel',   name:'อาฟเตอร์เจล',         price:250},
+  {id:'foam_pinn',name:'โฟมล้างหน้า'},{id:'moist_pinn',name:'มอยด์เจอร์'},
+  {id:'adv_pinn',name:'แอดวานซ์เซรั่ม'},{id:'mask_uv',name:'แมสยูวี'},
+  {id:'spray_spf',name:'สเปรย์กันแดด'},{id:'mask_face',name:'มาร์กหน้า'},
+  {id:'essence_wax',name:'เอสเซ้น ผิวแข็งแรง'}
 ];
+const WAX_WORDS = ['แว็กซ์','แวกซ์','wax','ขนรักแร้','ขนแขน','ขนขา','บิกินี่'];
+const SPA_WORDS = ['สปา','spa','นวด','ขัดผิว','อบ'];
 
-// ใช้เดากลุ่มต้นทุนของบิลเก่าที่ยังไม่ได้บันทึกรายการแยกบรรทัด
-const WAX_WORDS = ['wax','แว็กซ์','แว๊กซ์','คิ้ว','หนวด','เครา','ครึ่งขา','ทั้งขา','ทั้งแขน','รักแร้','บิกินี่','อก','หลัง','Facial Line','โหงวเฮ้ง'];
-const SPA_WORDS = ['spa','สปา'];
+let BB = [], SAM = [], range = 'today', loaded = {bb:false, sam:false};
 
-let SALES = [];
-let range = 'today';
-let dataReady = false;
+/* ---------- helper ---------- */
+const $ = s=>document.querySelector(s);
+const $$ = s=>[...document.querySelectorAll(s)];
+const money = n=>Math.round(n||0).toLocaleString('th-TH');
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct = (a,b)=> b>0 ? Math.round(a/b*100) : 0;
 
-// ── เครื่องมือ ─────────────────────────────────────────────
-const B = n => Math.round(n).toLocaleString('th-TH');
-const el = id => document.getElementById(id);
-const daysInMonth = d => new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
-
-function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2600); }
-
-const RANGES = [
-  {key:'today', label:'วันนี้'},
-  {key:'d7',    label:'7 วัน'},
-  {key:'d15',   label:'15 วัน'},
-  {key:'month', label:'เดือนนี้'},
-];
-
-function rangeBounds(key){
-  const end = new Date(); end.setHours(23,59,59,999);
-  const start = new Date();
-  if(key==='today') start.setHours(0,0,0,0);
-  else if(key==='d7')  { start.setDate(start.getDate()-6); start.setHours(0,0,0,0); }
-  else if(key==='d15') { start.setDate(start.getDate()-14); start.setHours(0,0,0,0); }
-  else { start.setDate(1); start.setHours(0,0,0,0); }
-  return {start,end};
-}
-
-// จำนวนวันในช่วง (ใช้เฉลี่ยเงินเดือน)
+function daysInMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0).getDate(); }
 function daysInRange(key){
   if(key==='today') return 1;
   if(key==='d7') return 7;
   if(key==='d15') return 15;
-  return new Date().getDate();          // เดือนนี้ = ตั้งแต่วันที่ 1 ถึงวันนี้
+  return new Date().getDate();
 }
-
-// เงินเดือนเฉลี่ยรายวัน คิดตามจำนวนวันจริงของแต่ละเดือน (30 หรือ 31)
+function rangeBounds(key){
+  const end = new Date(); end.setHours(23,59,59,999);
+  const start = new Date();
+  if(key==='today') start.setHours(0,0,0,0);
+  else if(key==='d7'){ start.setDate(start.getDate()-6); start.setHours(0,0,0,0); }
+  else if(key==='d15'){ start.setDate(start.getDate()-14); start.setHours(0,0,0,0); }
+  else { start.setDate(1); start.setHours(0,0,0,0); }
+  return {start, end};
+}
 function salaryForRange(key){
   const {start} = rangeBounds(key);
   const n = daysInRange(key);
@@ -293,57 +280,46 @@ function salaryForRange(key){
   }
   return sum;
 }
+function rangeLabel(key){
+  return {today:'วันนี้', d7:'7 วันล่าสุด', d15:'15 วันล่าสุด', month:'เดือนนี้'}[key]||'';
+}
 
-// ── แยกยอดบริการเป็นกลุ่มต้นทุน ────────────────────────────
+/* ---------- BB Glow ---------- */
 function guessGroup(name){
   const s = (name||'').toLowerCase();
   if(SPA_WORDS.some(w=>s.includes(w.toLowerCase()))) return 'spa';
   if(WAX_WORDS.some(w=>s.includes(w.toLowerCase()))) return 'wax';
   return 'bb';
 }
-
-// คืน {bb, wax, spa} = ยอดบริการแยกกลุ่ม + estimated = true ถ้าเป็นการเดาจากบิลเก่า
 function serviceByGroup(sale){
   const out = {bb:0, wax:0, spa:0, estimated:false};
   if(Array.isArray(sale.serviceItems) && sale.serviceItems.length){
     sale.serviceItems.forEach(it => { out[it.group||'bb'] += (it.price||0); });
     return out;
   }
-  // บิลเก่า: เดาจากชื่อบริการ
   out.estimated = true;
   const total = sale.serviceTotal!=null ? sale.serviceTotal : (sale.price||0);
   const names = (sale.service||'').split(',').map(s=>s.trim()).filter(Boolean);
   if(!names.length){ out.bb += total; return out; }
   const groups = [...new Set(names.map(guessGroup))];
-  if(groups.length===1){ out[groups[0]] += total; }
-  else { out.bb += total; }     // บิลผสมหลายกลุ่ม แยกราคาไม่ได้ → คิดเป็นฝั่ง BB
+  if(groups.length===1) out[groups[0]] += total; else out.bb += total;
   return out;
 }
-
 function homecareCost(sale){
   if(!Array.isArray(sale.homecareItems)) return 0;
   return sale.homecareItems.reduce((sum,it)=>{
     const unit = COSTS.hcCost[it.id];
-    return sum + (unit ? unit * (it.qty||0) : 0);
+    return sum + (unit ? unit*(it.qty||0) : 0);
   },0);
 }
+// บิลขายจริงของ BB Glow: ไม่ใช่รายการจองคิว (type) และไม่ใช่บิลที่ยกเลิก
+function isRealBB(s){ return !s.type && !s.voided; }
 
-// ── คำนวณทั้งช่วง ──────────────────────────────────────────
-function compute(key){
+function computeBB(key){
   const {start,end} = rangeBounds(key);
-  const bills = SALES.filter(s=>{
-    if(s.voided) return false;
-    const d = new Date(s.date);
-    return d>=start && d<=end;
-  });
-
-  let revenue=0, cash=0, transfer=0, svc=0, hc=0, comm=0;
-  let g = {bb:0, wax:0, spa:0};
-  let estimatedBills = 0;
-  const staffMap = {};
-  const svcMap = {};
-  const hcMap = {};
-
+  const bills = BB.filter(s=> isRealBB(s) && (()=>{ const d=new Date(s.date); return d>=start && d<=end; })() );
+  let revenue=0, cash=0, transfer=0, svc=0, hc=0, comm=0, estimatedBills=0;
+  const g={bb:0,wax:0,spa:0}, staffMap={}, svcMap={}, hcMap={};
   STAFF.forEach(s=>staffMap[s.id]={...s, bills:0, revenue:0, comm:0});
 
   bills.forEach(s=>{
@@ -354,35 +330,31 @@ function compute(key){
     hc  += (s.homecareTotal||0);
 
     const bg = serviceByGroup(s);
-    g.bb += bg.bb; g.wax += bg.wax; g.spa += bg.spa;
+    g.bb+=bg.bb; g.wax+=bg.wax; g.spa+=bg.spa;
     if(bg.estimated && (s.serviceTotal||s.price)) estimatedBills++;
 
     const mainComm = s.commission||0;
-    const coComm   = (s.coStaffs||[]).reduce((a,c)=>a+(c.comm||0),0);
+    const coComm = (s.coStaffs||[]).reduce((a,c)=>a+(c.comm||0),0);
     comm += mainComm + coComm;
-
     if(s.staffId && staffMap[s.staffId]){
-      staffMap[s.staffId].bills++;
-      staffMap[s.staffId].revenue += paid;
-      staffMap[s.staffId].comm += mainComm;
+      staffMap[s.staffId].bills++; staffMap[s.staffId].revenue += paid; staffMap[s.staffId].comm += mainComm;
     }
     (s.coStaffs||[]).forEach(c=>{ if(staffMap[c.staffId]) staffMap[c.staffId].comm += (c.comm||0); });
 
-    // บริการที่ขาย
     if(Array.isArray(s.serviceItems) && s.serviceItems.length){
       s.serviceItems.forEach(it=>{
-        const k = it.name||'บริการ';
+        const k=it.name||'บริการ';
         if(!svcMap[k]) svcMap[k]={name:k, qty:0, total:0};
         svcMap[k].qty++; svcMap[k].total += (it.price||0);
       });
     } else if(s.service){
-      s.service.split(',').map(x=>x.trim()).filter(Boolean).forEach((nm,i,arr)=>{
+      const arr = s.service.split(',').map(x=>x.trim()).filter(Boolean);
+      arr.forEach(nm=>{
         if(!svcMap[nm]) svcMap[nm]={name:nm, qty:0, total:0};
         svcMap[nm].qty++;
         svcMap[nm].total += (s.serviceTotal!=null?s.serviceTotal:(s.price||0))/arr.length;
       });
     }
-    // สินค้าโฮมแคร์
     (s.homecareItems||[]).forEach(it=>{
       if(!hcMap[it.id]) hcMap[it.id]={id:it.id, name:it.name, qty:0, total:0};
       hcMap[it.id].qty += (it.qty||0);
@@ -395,279 +367,245 @@ function compute(key){
   const salary = salaryForRange(key);
   const profit = revenue - comm - salary - productCost;
 
-  return {
-    bills, count:bills.length, revenue, cash, transfer, svc, hc, comm, salary, productCost, profit,
-    groups:g, estimatedBills,
-    avg: bills.length ? revenue/bills.length : 0,
-    staff: Object.values(staffMap),
-    services: Object.values(svcMap).sort((a,b)=>b.total-a.total),
-    homecare: Object.values(hcMap).sort((a,b)=>b.total-a.total),
-    salaryDaily: salaryForRange('today'),
-    days: daysInRange(key)
-  };
+  return {count:bills.length, revenue, cash, transfer, svc, hc, comm, salary, productCost, profit,
+    estimatedBills, avg: bills.length?revenue/bills.length:0,
+    staff:Object.values(staffMap),
+    services:Object.values(svcMap).sort((a,b)=>b.total-a.total),
+    homecare:Object.values(hcMap).sort((a,b)=>b.total-a.total)};
 }
 
-// 7 วันล่าสุด สำหรับกราฟ
+/* ---------- สำนัก (ไม่คิดต้นทุน) ---------- */
+function computeSam(key){
+  const {start,end} = rangeBounds(key);
+  const bills = SAM.filter(s=> !s.void && (()=>{ const d=new Date(s.ts); return d>=start && d<=end; })() );
+  let revenue=0, cash=0, transfer=0;
+  const itemMap={};
+  bills.forEach(s=>{
+    revenue += (s.total||0);
+    if(s.pay==='transfer') transfer += (s.total||0); else cash += (s.total||0);
+    (s.items||[]).forEach(it=>{
+      const k=it.name||'รายการ';
+      if(!itemMap[k]) itemMap[k]={name:k, qty:0, total:0};
+      itemMap[k].qty += (it.qty||1);
+      itemMap[k].total += (it.price||0)*(it.qty||1);
+    });
+  });
+  return {count:bills.length, revenue, cash, transfer,
+    profit: revenue,                       // ไม่หักต้นทุน ตามที่อาจารย์สั่ง
+    avg: bills.length?revenue/bills.length:0,
+    items:Object.values(itemMap).sort((a,b)=>b.total-a.total)};
+}
+
+/* ---------- กราฟ 7 วัน ---------- */
 function last7(){
   const out=[];
   for(let i=6;i>=0;i--){
-    const d=new Date(); d.setDate(d.getDate()-i);
+    const d=new Date(); d.setDate(d.getDate()-i); d.setHours(0,0,0,0);
     const key=d.toDateString();
-    const rev = SALES.filter(s=>!s.voided && new Date(s.date).toDateString()===key)
-                     .reduce((a,s)=>a+(s.totalPaid!=null?s.totalPaid:(s.paid||0)),0);
-    const n = SALES.filter(s=>!s.voided && new Date(s.date).toDateString()===key).length;
-    out.push({date:d, rev, n, label:d.toLocaleDateString('th-TH',{weekday:'short'}), full:d.toLocaleDateString('th-TH',{day:'numeric',month:'short'})});
+    const bb = BB.filter(s=>isRealBB(s) && new Date(s.date).toDateString()===key)
+                 .reduce((a,s)=>a+(s.totalPaid!=null?s.totalPaid:(s.paid||0)),0);
+    const sam = SAM.filter(s=>!s.void && new Date(s.ts).toDateString()===key)
+                   .reduce((a,s)=>a+(s.total||0),0);
+    out.push({bb, sam, label:d.toLocaleDateString('th-TH',{weekday:'short'}), day:d.getDate()});
   }
   return out;
 }
 
-// ── หน้าจอ ─────────────────────────────────────────────────
-function renderRanges(){
-  el('ranges').innerHTML = RANGES.map(r=>
-    `<button class="rbtn${r.key===range?' on':''}" onclick="setRange('${r.key}')">${r.label}</button>`).join('');
-}
-
-function setRange(k){ range=k; renderRanges(); render(); }
-window.setRange = setRange;
-
+/* ---------- แสดงผล ---------- */
 function render(){
-  if(!dataReady) return;
-  const d = compute(range);
-  const rangeLabel = RANGES.find(r=>r.key===range).label;
-  const app = el('app');
+  const b = computeBB(range), s = computeSam(range);
+  const revenue = b.revenue + s.revenue;
+  const profit  = b.profit + s.profit;
+  const count   = b.count + s.count;
+  const days7   = last7();
+  const mx = Math.max(1, ...days7.map(d=>d.bb+d.sam));
 
-  if(!d.count){
-    app.innerHTML = `<div class="card"><div class="state" style="padding:36px 10px">
-      <div style="font-size:1.8rem;margin-bottom:6px">✨</div>ยังไม่มีบิลในช่วง "${rangeLabel}" ค่ะ</div></div>`
-      + chartCard();
-    bindChart();
-    return;
+  let h = '';
+
+  /* HERO */
+  h += '<div class="card hero">';
+  h += '<div class="lb">ยอดขายรวม 2 กิจการ · '+esc(rangeLabel(range))+'</div>';
+  h += '<div class="big">'+money(revenue)+'<small>บาท</small></div>';
+  h += '<div class="splitbar">'+
+       '<i style="width:'+(revenue?b.revenue/revenue*100:50)+'%;background:var(--c-bb)"></i>'+
+       '<i style="width:'+(revenue?s.revenue/revenue*100:50)+'%;background:var(--c-sam)"></i></div>';
+  h += '<div class="legend">'+
+       '<span><i class="dot" style="background:var(--c-bb)"></i>BB Glow '+pct(b.revenue,revenue)+'% · '+money(b.revenue)+' ฿</span>'+
+       '<span><i class="dot" style="background:var(--c-sam)"></i>สำนัก '+pct(s.revenue,revenue)+'% · '+money(s.revenue)+' ฿</span></div>';
+  h += '<div class="herorow">'+
+       '<div><div class="lb">กำไรรวม</div><div class="v" style="color:var(--c-profit)">'+money(profit)+' ฿</div></div>'+
+       '<div><div class="lb">จำนวนบิล</div><div class="v">'+count+'</div></div>'+
+       '<div><div class="lb">เฉลี่ยต่อบิล</div><div class="v">'+money(count?revenue/count:0)+' ฿</div></div>'+
+       '</div></div>';
+
+  if(b.estimatedBills>0){
+    h += '<div class="warn">⚠️ ฝั่ง BB Glow มี '+b.estimatedBills+' บิลที่เป็นบิลเก่า (ก่อน POS v2.1) ระบบเดากลุ่มบริการให้ ค่าผลิตภัณฑ์จึงเป็นตัวเลขประมาณ</div>';
   }
 
-  const costs = [
-    {k:'กำไร',       v:Math.max(0,d.profit), c:'var(--c-profit)'},
-    {k:'ค่าคอม',     v:d.comm,               c:'var(--c-comm)'},
-    {k:'เงินเดือน',  v:d.salary,             c:'var(--c-salary)'},
-    {k:'ผลิตภัณฑ์',  v:d.productCost,        c:'var(--c-product)'},
-  ];
-  const stackTotal = costs.reduce((a,x)=>a+x.v,0) || 1;
-  const pct = d.revenue ? (d.profit/d.revenue*100) : 0;
+  /* สองกิจการ */
+  h += '<div class="two">';
 
-  app.innerHTML = `
-  <!-- ยอดขาย -->
-  <div class="card">
-    <div class="hero-label">ยอดขาย · ${rangeLabel}</div>
-    <div class="hero-num">${B(d.revenue)}<small>฿</small></div>
-    <div class="hero-sub">${d.count} บิล · เฉลี่ย ${B(d.avg)} ฿/บิล</div>
-    <div class="split">
-      <div><div class="k">💵 เงินสด</div><div class="v">${B(d.cash)} ฿</div></div>
-      <div><div class="k">📱 โอนเงิน</div><div class="v">${B(d.transfer)} ฿</div></div>
-    </div>
-    <div class="split">
-      <div><div class="k">บริการ</div><div class="v">${B(d.svc)} ฿</div></div>
-      <div><div class="k">🛍️ สินค้าโฮมแคร์</div><div class="v">${B(d.hc)} ฿</div></div>
-    </div>
-  </div>
+  // BB Glow
+  h += '<div class="card"><div class="bizhead"><i class="dot" style="background:var(--c-bb)"></i><h2>BB Glow หัวหิน</h2></div>';
+  h += '<div class="lb">ยอดขาย</div><div class="bignum">'+money(b.revenue)+' ฿</div>';
+  h += '<div class="sub2">'+
+       '<div><div class="lb">บิล</div><div class="v">'+b.count+'</div></div>'+
+       '<div><div class="lb">เฉลี่ย/บิล</div><div class="v">'+money(b.avg)+'</div></div>'+
+       '<div><div class="lb">เงินสด/โอน</div><div class="v" style="font-size:.95rem">'+money(b.cash)+' / '+money(b.transfer)+'</div></div>'+
+       '</div>';
+  h += '<div class="pf">'+
+       '<div class="pfline"><span>หัก ค่าคอมพนักงาน</span><b style="color:var(--c-comm)">−'+money(b.comm)+'</b></div>'+
+       '<div class="pfline"><span>หัก เงินเดือน ('+daysInRange(range)+' วัน)</span><b style="color:var(--c-salary)">−'+money(b.salary)+'</b></div>'+
+       '<div class="pfline"><span>หัก ค่าผลิตภัณฑ์</span><b style="color:var(--c-product)">−'+money(b.productCost)+'</b></div>'+
+       '<div class="pfline tot"><span>กำไรเหลือ</span><b>'+money(b.profit)+' ฿ <span style="font-size:.8rem;font-weight:500">('+pct(b.profit,b.revenue)+'%)</span></b></div>'+
+       '</div></div>';
 
-  <!-- กำไร -->
-  <div class="card">
-    <div class="card-h">💰 กำไรเหลือ <em>ตัวเลขดิบ ยังไม่หักค่าเช่า/น้ำไฟ</em></div>
-    <div><span class="profit-num">${B(d.profit)} ฿</span><span class="profit-pct">${pct.toFixed(0)}% ของยอดขาย</span></div>
-    <div class="stack">
-      ${costs.map(c=>`<div class="seg" style="width:${(c.v/stackTotal*100).toFixed(2)}%;background:${c.c}"></div>`).join('')}
-    </div>
-    <div class="legend">
-      ${costs.map(c=>`<div class="lg"><span class="sw" style="background:${c.c}"></span>${c.k} <b>${B(c.v)} ฿</b></div>`).join('')}
-    </div>
-    <div class="warn">
-      เงินเดือนคิดเฉลี่ยรายวัน ${B(d.salaryDaily)} ฿/วัน × ${d.days} วัน ·
-      ผลิตภัณฑ์ BB ${COSTS.rateBB}% · แว็กซ์ ${COSTS.rateWax}% · สปา ${COSTS.rateSpa}%
-      ${Object.keys(COSTS.hcCost).length ? '· ทุนสินค้าตามที่กรอกไว้' : '· <b>ยังไม่ได้กรอกทุนสินค้าโฮมแคร์</b> (กดเฟือง ⚙️)'}
-      ${d.estimatedBills ? `<br>⚠️ มี ${d.estimatedBills} บิลเก่าที่ยังไม่มีรายละเอียดรายบรรทัด ระบบเดากลุ่มจากชื่อบริการให้` : ''}
-    </div>
-  </div>
+  // สำนัก
+  h += '<div class="card"><div class="bizhead"><i class="dot" style="background:var(--c-sam)"></i><h2>สำนักบ้านนนทภักดิ์</h2></div>';
+  h += '<div class="lb">ยอดขาย</div><div class="bignum">'+money(s.revenue)+' ฿</div>';
+  h += '<div class="sub2">'+
+       '<div><div class="lb">บิล</div><div class="v">'+s.count+'</div></div>'+
+       '<div><div class="lb">เฉลี่ย/บิล</div><div class="v">'+money(s.avg)+'</div></div>'+
+       '<div><div class="lb">เงินสด/โอน</div><div class="v" style="font-size:.95rem">'+money(s.cash)+' / '+money(s.transfer)+'</div></div>'+
+       '</div>';
+  h += '<div class="pf">'+
+       '<div class="pfline"><span>ไม่คิดต้นทุน (อาจารย์ทำเอง)</span><b>−0</b></div>'+
+       '<div class="pfline tot"><span>กำไรเหลือ</span><b>'+money(s.profit)+' ฿ <span style="font-size:.8rem;font-weight:500">(100%)</span></b></div>'+
+       '</div></div>';
 
-  <!-- พนักงาน -->
-  <div class="card">
-    <div class="card-h">👥 พนักงาน <em>${rangeLabel}</em></div>
-    <div class="staff">
-      ${d.staff.map(s=>{
-        const salaryShare = d.salary/d.staff.length;
-        return `<div class="sc">
-          <div class="sc-top">
-            <div class="av" style="background:${s.bg}">${s.name.slice(0,2)}</div>
-            <div><div class="sc-nm">${s.name}</div><div class="sc-rl">${s.role}</div></div>
-          </div>
-          <div class="sc-grid">
-            <div><div class="sc-k">บิล</div><div class="sc-v">${s.bills}</div></div>
-            <div><div class="sc-k">ยอดขาย</div><div class="sc-v">${B(s.revenue)}</div></div>
-            <div><div class="sc-k">ค่าคอม</div><div class="sc-v" style="color:var(--c-comm)">${B(s.comm)}</div></div>
-            <div><div class="sc-k">+เงินเดือน</div><div class="sc-v" style="color:var(--c-salary)">${B(salaryShare)}</div></div>
-          </div>
-          <div style="text-align:right;font-size:0.76rem;color:var(--text-secondary);margin-top:7px">
-            รวมที่ได้รับช่วงนี้ <b style="color:var(--text-primary)">${B(s.comm + salaryShare)} ฿</b>
-          </div>
-        </div>`;
-      }).join('')}
-    </div>
-  </div>
+  h += '</div>';
 
-  <!-- บริการ -->
-  <div class="card">
-    <div class="card-h">✨ บริการที่ขาย <em>${rangeLabel}</em></div>
-    ${d.services.slice(0,12).map(s=>`
-      <div class="row">
-        <div class="nm">${s.name}</div>
-        <div class="qty">×${s.qty}</div>
-        <div class="amt">${B(s.total)} ฿</div>
-      </div>`).join('') || '<div style="color:var(--text-muted);font-size:0.85rem">ไม่มีรายการ</div>'}
-    ${d.services.length>12?`<div style="text-align:center;font-size:0.72rem;color:var(--text-muted);padding-top:8px">และอีก ${d.services.length-12} รายการ</div>`:''}
-  </div>
-
-  <!-- โฮมแคร์ -->
-  ${d.homecare.length?`
-  <div class="card">
-    <div class="card-h">🛍️ สินค้าโฮมแคร์ <em>${rangeLabel}</em></div>
-    ${d.homecare.map(h=>{
-      const unit = COSTS.hcCost[h.id];
-      const profit = unit ? h.total - unit*h.qty : null;
-      return `<div class="row">
-        <div class="nm">${h.name}${profit!=null?`<small>กำไร ${B(profit)} ฿</small>`:'<small>ยังไม่ได้กรอกทุน</small>'}</div>
-        <div class="qty">×${h.qty}</div>
-        <div class="amt">${B(h.total)} ฿</div>
-      </div>`;
-    }).join('')}
-  </div>`:''}
-
-  ${chartCard()}
-  <div style="text-align:center;font-size:0.68rem;color:var(--text-muted);padding:4px 0 10px">
-    แดชบอร์ด v${APP_VERSION} · อ่านข้อมูลจากระบบ POS โดยตรง
-  </div>`;
-
-  bindChart();
-}
-
-function chartCard(){
-  const days = last7();
-  const max = Math.max(...days.map(d=>d.rev), 1);
-  return `
-  <div class="card">
-    <div class="card-h">📈 7 วันล่าสุด <em>รวม ${B(days.reduce((a,d)=>a+d.rev,0))} ฿</em></div>
-    <div class="chart" id="chart">
-      ${days.map((d,i)=>`
-        <div class="col${d.rev===max&&d.rev>0?' top':''}" data-i="${i}" data-rev="${d.rev}" data-n="${d.n}" data-full="${d.full}">
-          ${d.rev>0?`<div class="dlabel">${d.rev>=1000?(d.rev/1000).toFixed(1)+'k':d.rev}</div>`:''}
-          <div class="bar" style="height:${d.rev/max*100}%"></div>
-        </div>`).join('')}
-      <div class="tip" id="tip"></div>
-    </div>
-    <div class="xlab">${days.map(d=>`<div>${d.label}</div>`).join('')}</div>
-  </div>`;
-}
-
-function bindChart(){
-  const chart = el('chart'); if(!chart) return;
-  const tip = el('tip');
-  chart.querySelectorAll('.col').forEach(col=>{
-    const show = e=>{
-      const r = chart.getBoundingClientRect();
-      const c = col.getBoundingClientRect();
-      tip.innerHTML = `${col.dataset.full} · ${B(+col.dataset.rev)} ฿ · ${col.dataset.n} บิล`;
-      tip.style.left = (c.left - r.left + c.width/2)+'px';
-      tip.style.top  = (c.top - r.top - 6)+'px';
-      tip.classList.add('on');
-    };
-    const hide = ()=>tip.classList.remove('on');
-    col.addEventListener('mouseenter', show);
-    col.addEventListener('mouseleave', hide);
-    col.addEventListener('touchstart', e=>{ show(e); setTimeout(hide, 2200); }, {passive:true});
+  /* กราฟ */
+  h += '<div class="card"><div class="lb">ยอดขาย 7 วันล่าสุด (สองกิจการซ้อนกัน)</div><div class="bars">';
+  days7.forEach(d=>{
+    const tot = d.bb+d.sam;
+    const hp = v=> Math.round(v/mx*100);
+    h += '<div class="bcol" title="'+d.day+': BB '+money(d.bb)+' / สำนัก '+money(d.sam)+'">'+
+         (tot?'<span class="bval">'+(tot>=1000?Math.round(tot/1000)+'k':tot)+'</span>':'')+
+         '<span class="bstack">'+
+           (d.sam?'<i class="top" style="height:'+hp(d.sam)+'%;background:var(--c-sam)"></i>':'')+
+           (d.bb?'<i class="'+(d.sam?'':'top')+'" style="height:'+hp(d.bb)+'%;background:var(--c-bb)"></i>':'')+
+         '</span></div>';
   });
+  h += '</div><div class="bxs">'+days7.map(d=>'<div>'+d.label+'<br>'+d.day+'</div>').join('')+'</div>';
+  h += '<div class="legend" style="margin-top:12px">'+
+       '<span><i class="dot" style="background:var(--c-bb)"></i>BB Glow</span>'+
+       '<span><i class="dot" style="background:var(--c-sam)"></i>สำนัก</span></div></div>';
+
+  /* พนักงาน BB Glow */
+  const activeStaff = b.staff.filter(x=>x.bills>0 || x.comm>0);
+  if(activeStaff.length){
+    h += '<h3 class="sec">พนักงาน BB Glow</h3><div class="card">';
+    activeStaff.forEach(st=>{
+      const share = b.salary/Math.max(1,STAFF.length);
+      h += '<div class="staff"><div class="av" style="background:'+st.bg+'">'+esc(st.name.slice(0,1))+'</div>'+
+           '<div class="nm"><b>'+esc(st.name)+'</b><span>'+st.bills+' บิล · ยอด '+money(st.revenue)+' ฿</span></div>'+
+           '<div class="amt"><b>'+money(st.comm+share)+' ฿</b><span>คอม '+money(st.comm)+' + เงินเดือน '+money(share)+'</span></div></div>';
+    });
+    h += '</div>';
+  }
+
+  /* บริการ BB Glow */
+  if(b.services.length){
+    h += '<h3 class="sec">บริการที่ขาย — BB Glow</h3><div class="card"><table><thead><tr>'+
+         '<th>บริการ</th><th style="text-align:right">ครั้ง</th><th style="text-align:right">ยอด</th></tr></thead><tbody>';
+    b.services.slice(0,12).forEach(x=>{
+      h += '<tr><td>'+esc(x.name)+'</td><td class="n">'+x.qty+'</td><td class="n g">'+money(x.total)+'</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  /* รายการสำนัก */
+  if(s.items.length){
+    h += '<h3 class="sec">รายการที่ทำ — สำนัก</h3><div class="card"><table><thead><tr>'+
+         '<th>รายการ</th><th style="text-align:right">ครั้ง</th><th style="text-align:right">ยอด</th></tr></thead><tbody>';
+    s.items.slice(0,12).forEach(x=>{
+      h += '<tr><td>'+esc(x.name)+'</td><td class="n">'+x.qty+'</td><td class="n g">'+money(x.total)+'</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  /* โฮมแคร์ */
+  if(b.homecare.length){
+    h += '<h3 class="sec">สินค้าโฮมแคร์ — BB Glow</h3><div class="card"><table><thead><tr>'+
+         '<th>สินค้า</th><th style="text-align:right">ชิ้น</th><th style="text-align:right">ยอด</th></tr></thead><tbody>';
+    b.homecare.forEach(x=>{
+      h += '<tr><td>'+esc(x.name||x.id)+'</td><td class="n">'+x.qty+'</td><td class="n g">'+money(x.total)+'</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  if(!count){
+    h += '<div class="card"><div class="empty">ยังไม่มีบิลในช่วงนี้</div></div>';
+  }
+
+  h += '<p class="note" style="text-align:center;margin:18px 0 8px">ตัวเลขดิบ ไม่รวมค่าเช่า/น้ำไฟ · อัปเดตสดตามบิลที่ปิดในระบบ</p>';
+
+  $('#body').innerHTML = h;
 }
 
-// ── ตั้งค่า ────────────────────────────────────────────────
-function openSettings(){
-  el('settings-body').innerHTML = `
-    <div class="sec-t">เงินเดือน</div>
-    <div class="fld">
-      <label>เงินเดือนรวมทั้งทีม<small>ต่อเดือน · ระบบจะเฉลี่ยเป็นรายวันให้</small></label>
-      <input type="number" id="set-salary" value="${COSTS.salaryTotal}">
-    </div>
-
-    <div class="sec-t">ต้นทุนผลิตภัณฑ์ (% ของยอดบริการ)</div>
-    <div class="fld"><label>งานฝั่ง BB ทั้งหมด</label><input type="number" id="set-bb" value="${COSTS.rateBB}"></div>
-    <div class="fld"><label>งานแว็กซ์</label><input type="number" id="set-wax" value="${COSTS.rateWax}"></div>
-    <div class="fld"><label>งานสปา</label><input type="number" id="set-spa" value="${COSTS.rateSpa}"></div>
-
-    <div class="sec-t">ทุนสินค้าโฮมแคร์ (บาท/ชิ้น)</div>
-    <p class="note" style="margin:2px 0 6px">กรอกเฉพาะตัวที่รู้ราคาทุนก็ได้ ตัวที่เว้นว่างระบบจะไม่นับเป็นต้นทุน</p>
-    ${HOMECARE.map(h=>`
-      <div class="fld">
-        <label>${h.name}<small>ขาย ${h.price} ฿</small></label>
-        <input type="number" id="hc-${h.id}" placeholder="ทุน" value="${COSTS.hcCost[h.id]??''}">
-      </div>`).join('')}`;
-  el('ov').classList.add('on');
-}
-function closeSettings(){ el('ov').classList.remove('on'); }
-
-async function saveSettings(){
-  const num = (id,def) => { const v=parseFloat(el(id).value); return isNaN(v)?def:v; };
-  const hc = {};
-  HOMECARE.forEach(h=>{
-    const v = parseFloat(el('hc-'+h.id).value);
-    if(!isNaN(v) && v>=0) hc[h.id]=v;
+/* ---------- ตั้งค่า ---------- */
+function openSheet(){
+  let h = '';
+  h += '<div class="frow"><label>เงินเดือนรวมทีม BB Glow (บาท/เดือน)</label><input id="f_salary" type="number" value="'+COSTS.salaryTotal+'"></div>';
+  h += '<div class="frow"><label>ต้นทุนผลิตภัณฑ์ งาน BB (%)</label><input id="f_bb" type="number" value="'+COSTS.rateBB+'"></div>';
+  h += '<div class="frow"><label>ต้นทุนผลิตภัณฑ์ งานแว็กซ์ (%)</label><input id="f_wax" type="number" value="'+COSTS.rateWax+'"></div>';
+  h += '<div class="frow"><label>ต้นทุนผลิตภัณฑ์ งานสปา (%)</label><input id="f_spa" type="number" value="'+COSTS.rateSpa+'"></div>';
+  h += '<h3 class="sec">ทุนสินค้าโฮมแคร์ต่อชิ้น</h3>';
+  HOMECARE.forEach(p=>{
+    h += '<div class="frow"><label>'+esc(p.name)+'</label><input data-hc="'+p.id+'" type="number" value="'+(COSTS.hcCost[p.id]||'')+'" placeholder="0"></div>';
   });
+  $('#fields').innerHTML = h;
+  $('#sheet').classList.remove('hide');
+}
+function saveSheet(){
   const next = {
-    salaryTotal: num('set-salary', DEFAULTS.salaryTotal),
-    rateBB: num('set-bb', DEFAULTS.rateBB),
-    rateWax: num('set-wax', DEFAULTS.rateWax),
-    rateSpa: num('set-spa', DEFAULTS.rateSpa),
-    hcCost: hc
+    salaryTotal: +$('#f_salary').value || 0,
+    rateBB: +$('#f_bb').value || 0,
+    rateWax: +$('#f_wax').value || 0,
+    rateSpa: +$('#f_spa').value || 0,
+    hcCost: {}
   };
+  $$('#fields input[data-hc]').forEach(i=>{ const v=+i.value; if(v>0) next.hcCost[i.dataset.hc]=v; });
   COSTS = next;
-  try{
-    await window.saveCosts(next);
-    toast('✅ บันทึกแล้ว ใช้ได้ทุกเครื่อง');
-  }catch(e){
-    toast('⚠️ บันทึกขึ้นระบบไม่ได้ ใช้เฉพาะเครื่องนี้');
-  }
-  try{ localStorage.setItem('bbg_dash_costs', JSON.stringify(next)); }catch(e){}
-  closeSettings();
+  try{ localStorage.setItem('dash2_costs', JSON.stringify(next)); }catch(e){}
+  if(window.saveCosts) window.saveCosts(next).catch(e=>console.warn('บันทึกค่าตั้งค่าไม่สำเร็จ',e));
+  $('#sheet').classList.add('hide');
   render();
 }
-window.openSettings = openSettings;
-window.closeSettings = closeSettings;
-window.saveSettings = saveSettings;
 
-// ── เริ่มทำงาน ─────────────────────────────────────────────
-try{
-  const cached = localStorage.getItem('bbg_dash_costs');
-  if(cached) COSTS = {...DEFAULTS, ...JSON.parse(cached)};
-}catch(e){}
-
-renderRanges();
-
-function boot(){
-  window.listenSales(rows=>{
-    SALES = rows;
-    dataReady = true;
-    el('live-txt').textContent = 'สด ' + new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
-    render();
-  });
-  window.listenCosts(data=>{
-    if(data){
-      COSTS = {...DEFAULTS, ...data, hcCost:{...(data.hcCost||{})}};
-      try{ localStorage.setItem('bbg_dash_costs', JSON.stringify(COSTS)); }catch(e){}
-      if(dataReady) render();
-    }
-  });
+/* ---------- เริ่มระบบ ---------- */
+function showApp(){
+  $('#loading').classList.add('hide');
+  $('#app').classList.remove('hide');
+  render();
 }
-if(window.dbReady) boot(); else window.addEventListener('dbReady', boot);
+function startListening(){
+  try{ const c = JSON.parse(localStorage.getItem('dash2_costs')); if(c) COSTS = {...DEFAULTS, ...c}; }catch(e){}
 
-setTimeout(()=>{
-  if(!dataReady) el('app').innerHTML =
-    `<div class="card"><div class="state">เชื่อมต่อฐานข้อมูลไม่ได้ค่ะ<br>
-     <span style="font-size:0.78rem">ลองรีเฟรชหน้านี้อีกครั้ง หรือเช็คอินเทอร์เน็ต</span></div></div>`;
-}, 12000);
+  if(window.__MOCK__){                       // โหมดทดสอบ
+    BB = window.__MOCK__.bb||[]; SAM = window.__MOCK__.sam||[];
+    if(window.__MOCK__.costs) COSTS = {...DEFAULTS, ...window.__MOCK__.costs};
+    showApp(); return;
+  }
+  window.listenBB(rows=>{ BB = rows; loaded.bb = true; if(loaded.bb) showApp(); });
+  window.listenSam(rows=>{ SAM = rows; loaded.sam = true; showApp(); });
+  window.listenCosts(c=>{ if(c){ COSTS = {...DEFAULTS, ...c}; render(); } });
+  setTimeout(()=>{ if(!loaded.bb && !loaded.sam) showApp(); }, 9000);  // เน็ตช้า/อ่านไม่ได้ ก็ยังเปิดหน้าให้เห็น
+}
+if(window.__MOCK__ || window.dbReady) startListening();
+else window.addEventListener('dbReady', startListening);
+
+$('#ranges').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  range = b.dataset.r;
+  $$('#ranges button').forEach(x=>x.classList.toggle('on', x===b));
+  render();
+});
+$('#gear').onclick = openSheet;
+$('#sclose').onclick = ()=>$('#sheet').classList.add('hide');
+$('#ssave').onclick = saveSheet;
+$('#sheet').addEventListener('click', e=>{ if(e.target.id==='sheet') $('#sheet').classList.add('hide'); });
 </script>
 </body>
 </html>

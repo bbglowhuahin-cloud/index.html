@@ -91,6 +91,9 @@ header .sub{font-size:.8rem;color:var(--text-muted)}
 .pfline.tot{border-top:1px dashed var(--border);margin-top:6px;padding-top:9px;font-size:1rem}
 .pfline.tot b{color:var(--c-profit);font-size:1.15rem}
 
+.lastbill{margin-top:9px;padding:9px 11px;border-radius:10px;background:var(--surface-2);
+  color:var(--text-secondary);font-size:.88rem;line-height:1.45}
+
 /* chart */
 .bars{display:flex;align-items:flex-end;gap:5px;height:160px;margin-top:6px}
 .bcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;
@@ -396,6 +399,22 @@ function computeSam(key){
     items:Object.values(itemMap).sort((a,b)=>b.total-a.total)};
 }
 
+/* ---------- วันล่าสุดที่มีบิล (ไว้บอกตอนช่วงที่เลือกยังว่าง) ---------- */
+function lastBillDate(which){
+  const arr = which==='bb'
+    ? BB.filter(isRealBB).map(s=>s.date)
+    : SAM.filter(s=>!s.void).map(s=>s.ts);
+  if(!arr.length) return null;
+  const d = new Date(Math.max(...arr.map(x=>+new Date(x))));
+  const TM=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  return d.getDate()+' '+TM[d.getMonth()]+' '+(d.getFullYear()+543);
+}
+function emptyHint(which){
+  const last = lastBillDate(which);
+  return '<div class="lastbill">ยังไม่มีบิลในช่วงที่เลือก'+
+         (last? ' · บิลล่าสุด '+esc(last) : '')+'</div>';
+}
+
 /* ---------- กราฟ 7 วัน ---------- */
 function last7(){
   const out=[];
@@ -453,6 +472,7 @@ function render(){
        '<div><div class="lb">เฉลี่ย/บิล</div><div class="v">'+money(b.avg)+'</div></div>'+
        '<div><div class="lb">เงินสด/โอน</div><div class="v" style="font-size:.95rem">'+money(b.cash)+' / '+money(b.transfer)+'</div></div>'+
        '</div>';
+  if(!b.count) h += emptyHint('bb');
   h += '<div class="pf">'+
        '<div class="pfline"><span>หัก ค่าคอมพนักงาน</span><b style="color:var(--c-comm)">−'+money(b.comm)+'</b></div>'+
        '<div class="pfline"><span>หัก เงินเดือน ('+daysInRange(range)+' วัน)</span><b style="color:var(--c-salary)">−'+money(b.salary)+'</b></div>'+
@@ -468,6 +488,7 @@ function render(){
        '<div><div class="lb">เฉลี่ย/บิล</div><div class="v">'+money(s.avg)+'</div></div>'+
        '<div><div class="lb">เงินสด/โอน</div><div class="v" style="font-size:.95rem">'+money(s.cash)+' / '+money(s.transfer)+'</div></div>'+
        '</div>';
+  if(!s.count) h += emptyHint('sam');
   h += '<div class="pf">'+
        '<div class="pfline"><span>ไม่คิดต้นทุน (อาจารย์ทำเอง)</span><b>−0</b></div>'+
        '<div class="pfline tot"><span>กำไรเหลือ</span><b>'+money(s.profit)+' ฿ <span style="font-size:.8rem;font-weight:500">(100%)</span></b></div>'+
